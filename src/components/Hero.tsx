@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Shield, Users } from "lucide-react";
 const Hero = () => {
-  return <section className="pt-20 pb-16 bg-gradient-hero">
+  return <section className="pt-32 pb-16 bg-gradient-hero">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-4xl mx-auto">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6">
