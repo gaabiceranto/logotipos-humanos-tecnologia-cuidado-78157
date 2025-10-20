@@ -43,10 +43,17 @@ serve(async (req) => {
       iat: now,
     };
 
-    // Encode header and claim
+    // Encode header and claim using base64url
     const encoder = new TextEncoder();
-    const b64Header = btoa(JSON.stringify(header));
-    const b64Claim = btoa(JSON.stringify(claim));
+    const base64url = (input: string) => {
+      return btoa(input)
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_')
+        .replace(/=/g, '');
+    };
+    
+    const b64Header = base64url(JSON.stringify(header));
+    const b64Claim = base64url(JSON.stringify(claim));
     const signatureInput = `${b64Header}.${b64Claim}`;
 
     // Import private key
@@ -76,7 +83,14 @@ serve(async (req) => {
       encoder.encode(signatureInput)
     );
 
-    const b64Signature = btoa(String.fromCharCode(...new Uint8Array(signature)));
+    const base64urlSignature = (sig: ArrayBuffer) => {
+      return btoa(String.fromCharCode(...new Uint8Array(sig)))
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_')
+        .replace(/=/g, '');
+    };
+    
+    const b64Signature = base64urlSignature(signature);
     const jwt = `${signatureInput}.${b64Signature}`;
 
     // Exchange JWT for access token
@@ -127,8 +141,9 @@ serve(async (req) => {
     );
   } catch (error) {
     console.error('Error in save-lead-to-sheets function:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Erro desconhecido';
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: errorMessage }),
       {
         status: 500,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
