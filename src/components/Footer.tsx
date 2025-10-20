@@ -1,16 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Mail, Phone, MessageCircle, MapPin } from "lucide-react";
+import footerLogo from "@/assets/logos-footer-logo.svg";
 const Footer = () => {
   return <footer className="bg-foreground text-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo e Descrição */}
           <div className="md:col-span-2">
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-lg">L</span>
-              </div>
-              <span className="text-xl font-bold">Logos Contábil</span>
+            <div className="mb-4">
+              <img src={footerLogo} alt="Logos Contábil" className="h-10" />
             </div>
             <p className="text-background/80 mb-6 max-w-md">
               Contabilidade digital, humanizada e com propósito. Especialistas em profissionais da saúde 
