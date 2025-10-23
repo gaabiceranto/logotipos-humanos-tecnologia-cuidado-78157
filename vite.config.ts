@@ -5,10 +5,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base:
-    process.env.NODE_ENV === "production"
-      ? "/logotipos-humanos-tecnologia-cuidado-78157/"
-      : "/",
+  base: "/",
   server: {
     host: "::",
     port: 8080,
